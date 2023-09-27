@@ -6,6 +6,13 @@ import openai
 import environ
 
 def index(request):
+    template = loader.get_template('fashion_ai/index.html')
+    context = {
+        'form': ChatForm(),
+    }
+    return HttpResponse(template.render(context, request))
+
+def generate_prompt(request):
     chat_results = ""
     #formに入力されている場合の処理
     if request.method == "POST":
@@ -42,7 +49,7 @@ def index(request):
     #formに入力されていない場合の処理->初期表示
     else:
         form = ChatForm()
-    template = loader.get_template('fashion_ai/index.html')
+    template = loader.get_template('fashion_ai/generate_prompt.html')
     context = {
         'form': form,
         'chat_results': chat_results
