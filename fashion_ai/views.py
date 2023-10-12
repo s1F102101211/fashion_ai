@@ -55,3 +55,10 @@ def generate_prompt(request):
         'chat_results': chat_results
     }    
     return HttpResponse(template.render(context, request))
+
+def select(request):
+    template = loader.get_template('fashion_ai/select.html')
+    context = {
+        'form': ChatForm(),
+    }
+    return HttpResponse(template.render(context, request))
