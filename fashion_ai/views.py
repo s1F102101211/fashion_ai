@@ -12,6 +12,32 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+def start(request):
+	return render(request, 'fashion_ai/start.html')
+
+def home(request):
+	return render(request, 'fashion_ai/home.html')
+
+def select(request):
+	return render(request, 'fashion_ai/select.html')
+
+def prompt(request):
+	return render(request, 'fashion_ai/prompt.html')
+
+def preview(request):
+	return render(request, 'fashion_ai/preview.html')
+
+def original(request):
+	return render(request, 'fashion_ai/original.html')
+
+def collection(request):
+	return render(request, 'fashion_ai/collection.html')
+
+def gallery(request):
+	return render(request, 'fashion_ai/gallery.html')
+
+
 def generate_prompt(request):
     chat_results = ""
     #formに入力されている場合の処理
@@ -54,11 +80,4 @@ def generate_prompt(request):
         'form': form,
         'chat_results': chat_results
     }    
-    return HttpResponse(template.render(context, request))
-
-def select(request):
-    template = loader.get_template('fashion_ai/select.html')
-    context = {
-        'form': ChatForm(),
-    }
     return HttpResponse(template.render(context, request))
