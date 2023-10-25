@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import fashion_ai.views
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fashion_ai.urls')),
+    path('login/', LoginView.as_view(template_name='fashion_ai/login.html'), name='login'),  # 追加
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
