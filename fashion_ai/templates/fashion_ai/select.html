@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
-    {% load static %}
     <meta charset = "utf-8">
     <title>select</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>sample</p>
+    <p>SELECT</p>
+    <div>
+        <div class="category"></div>
+        <div class="item">
+            <a href="{% url 'prompt' %}"><span class="item_id">1</span></a>
+            <a href="{% url 'prompt' %}"><span class="item_id">2</span></a>
+            <a href="{% url 'prompt' %}"><span class="item_id">3</span></a>
+            <a href="{% url 'prompt' %}"><span class="item_id">4</span></a>
+            <a href="{% url 'prompt' %}"><span class="item_id">5</span></a>
+            <a href="{% url 'prompt' %}"><span class="item_id">6</span></a>
+        </div>
+    </div>
+    <a href="{% url 'home' %}">BACK</a>
 </body>
 </html>

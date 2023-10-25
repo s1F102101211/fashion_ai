@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
-    {% load static %}
     <meta charset = "utf-8">
     <title>index</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>メインページ</p>
+    <p>index</p>
+    <a href="{% url 'start' %}">start</a><br>
+    <a href="{% url 'home' %}">home</a><br>
+    <a href="{% url 'select' %}">select</a><br>
+    <a href="{% url 'prompt' %}">prompt</a><br>
+    <a href="{% url 'preview' %}">preview</a><br>
+    <a href="{% url 'original' %}">original</a><br>
+    <a href="{% url 'collection' %}">collection</a><br>
+    <a href="{% url 'gallery' %}">gallery</a><br><br>
     <a href={% url "generate_prompt" %}>generate_prompt</a>
 </body>
 </html>

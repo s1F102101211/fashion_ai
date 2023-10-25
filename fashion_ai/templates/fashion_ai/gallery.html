@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
-    {% load static %}
     <meta charset = "utf-8">
     <title>gallery</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>sample</p>
+    <p>GALLERY</p>
+    <a href="{% url 'home' %}">BACK</a><br>
 </body>
 </html>
