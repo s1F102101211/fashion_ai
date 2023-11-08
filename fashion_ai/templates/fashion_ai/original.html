@@ -7,7 +7,65 @@
     <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>ORIGINAL</p>
+    <p>original</p>
+
+    {% if design %}
+        <form method="post">
+        {% csrf_token %}
+        <div class="left">
+            <label>TITLE : </label>
+            <input name="title" value="{{ design.title }}" style="width: 150px; height: 20px;">
+        </div>     
+        <button class="right" type="submit">更新</button>
+        </form><br>
+    {% else %}
+        <div class="left">
+            <label>TITLE : </label>
+            <input disabled style="width: 150px; height: 20px;">
+        </div>     
+        <button class=" right none">更新</button><br><br>
+    {% endif %}
+
+    <p class="data_p">トップス</p>
+    <div class="data_div">
+        {% if tops %}
+        {% for design in tops %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static design.img %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ design.title }}</p>
+                <a href="{% url 'update_design' design.id %}">編集</a>
+                <a href="{% url 'delete_design' design.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
+    <p class="data_p">ボトムス</p>
+    <div class="data_div">
+        {% if bottoms %}
+        {% for design in bottoms %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static design.img %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ design.title }}</p>
+                <a href="{% url 'update_design' design.id %}">編集</a>
+                <a href="{% url 'delete_design' design.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
     <a href="{% url 'home' %}">BACK</a><br>
 </body>
 </html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset = "utf-8">
+    <title>data</title>
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    <script type="text/javascript" src="{% static 'fashion_ai/js/sample.js' %}" ></script>
+</head>
+<body>
+    <div class="left" style="margin-right: 30px;">
+        <p>data</p>
+        <!-- UPDATE -->
+        {% if item %}
+            <div>
+                <label>CATEGORY1 : </label>
+                <input disabled value="デフォルト" style="width: 150px;">
+            </div> 
+            <div>
+                <label>CATEGORY2 : </label>
+                <input disabled value="デフォルト" style="width: 150px;">
+            </div> 
+            <div>
+                <label>IMG : </label>
+                <input disabled value="fashion_ai/img/item/default.png" style="width: 215px;">
+            </div>    
+            <button class="none">追加</button>
+        <!-- DATA -->
+        {% else %}
+            <form method="post">
+            {% csrf_token %}
+            <div>
+                <label>CATEGORY1 : </label>
+                <select name="category1" style="width: 158px; height: 22px;">
+                    <option value="デフォルト">デフォルト</option>
+                    <option value="トップス">トップス</option>
+                    <option value="ボトムス">ボトムス</option>
+                    <option value="アウター">アウター</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div> 
+            <div>
+                <label>CATEGORY2 : </label>
+                <input name="category2" value="デフォルト" style="width: 150px;">
+            </div> 
+            <div>
+                <label>IMG : </label>
+                <input name="img" value="fashion_ai/img/item/default.png" style="width: 215px;">
+            </div>    
+            <button type="submit">追加</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="right">
+        <p>update</p>
+        <!-- UPDATE -->
+        {% if item %}
+            <form method="post">
+            {% csrf_token %}
+            <div>
+                <label>CATEGORY1 : </label>
+                <input name="category1" value="{{ item.category1 }}" style="width: 150px;">
+            </div> 
+            <div>
+                <label>CATEGORY2 : </label>
+                <input name="category2" value="{{ item.category2 }}" style="width: 150px;">
+            </div> 
+            <div>
+                <label>IMG : </label>
+                <input name="img" value="{{ item.img }}" style="width: 215px;">
+            </div>      
+            <button type="submit">更新</button>
+            </form>
+        <!-- DATA -->
+        {% else %}
+            <div>
+                <label>CATEGORY1 : </label>
+                <input disabled style="width: 150px;">
+            </div> 
+            <div>
+                <label>CATEGORY2 : </label>
+                <input disabled style="width: 150px;">
+            </div> 
+            <div>
+                <label>IMG : </label>
+                <input disabled style="width: 215px;">
+            </div>      
+            <button class="none">更新</button>
+        {% endif %}
+    </div>
+
+    <br><br>
+    <!-- TOPS -->
+    <p class="data_p">トップス</p>
+    <div class="data_div">
+        {% if tops %}
+        {% for item in tops %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static item.img %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ item.category2 }}</p>
+                <a href="{% url 'update_item' item.id %}">編集</a>
+                <a href="{% url 'delete_item' item.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
+    <!-- BOTTOMS -->
+    <p class="data_p">ボトムス</p>
+    <div class="data_div">
+        {% if bottoms %}
+        {% for item in bottoms %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static item.img %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ item.category2 }}</p>
+                <a href="{% url 'update_item' item.id %}">編集</a>
+                <a href="{% url 'delete_item' item.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
+    <!-- OUTERS -->
+    <p class="data_p">アウター</p>
+    <div class="data_div">
+        {% if outers %}
+        {% for item in outers %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static item.img %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ item.category2 }}</p>
+                <a href="{% url 'update_item' item.id %}">編集</a>
+                <a href="{% url 'delete_item' item.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
+    <!-- OTHER -->
+    <p class="data_p">その他</p>
+    <div class="data_div">
+        {% if others %}
+        {% for item in others %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static item.img %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ item.category2 }}</p>
+                <a href="{% url 'update_item' item.id %}">編集</a>
+                <a href="{% url 'delete_item' item.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
+    <br>
+    <a href="{% url 'index' %}">戻る</a><br>
+</body>
+</html>

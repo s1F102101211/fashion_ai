@@ -1,25 +1,105 @@
-span{
+a {
     display: inline-block;
-}
-
-.category{
-    float: left;
-    background-color: #999;
-    width: 30%;
-    height: 240px;
-}
-
-.item{
-    float: right;
-    background-color: #666;
-    width: 70%;
-    height: 240px;
-}
-
-.item_id{
+    padding: 2px 6px;
     color: #000;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #fff;
+    border: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: #666;
+}
+
+a:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+button{
+    display: inline-block;
+    padding: 2px 6px;
+    color: #000;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #fff;
+    border: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: #666;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.none{
+    color: rgb(84, 84, 84);
+    border-color: rgba(118, 118, 118, 0.3);
+    background-color: rgba(239, 239, 239, 0.3);
+}
+
+.none:hover{
+    cursor: default;
+    background-color: rgba(239, 239, 239, 0.3);
+}
+
+.left{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.right{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.select_p{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #bbb;
+    width: 80px;
+    padding: 23px 10px;
+    margin: 0px;
+}
+
+.select_div{
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #bbb;
+    height: 60px;
+    padding: 5px 7.5px;
+    margin: 5px;
+}
+
+.select_span{
+    display: inline-block;
     background-color: #ccc;
-    width: 27.8%;
-    height: 100px;
-    margin: 10px;
+    height: 50px;
+    margin: 5px 2.5px;
+}
+
+.select_a{
+    height: 50px;
+    padding: 0px;
+    border: none;
+}
+
+.data_p{
+    margin: 0px;
+}
+
+.data_div{
+    background-color: #bbb;
+    padding: 5px 7.5px;
+    margin: 5px;
+}
+
+.data_span{
+    display: inline-block;
+    background-color: #ccc;
+    padding: 5px;
+    margin: 5px 2.5px;
 }

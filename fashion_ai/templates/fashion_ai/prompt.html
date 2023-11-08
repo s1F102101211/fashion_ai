@@ -7,9 +7,34 @@
     <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>PROMPT</p>
-    <p>item_id : {{item_id}}</p>
-    <a href="{% url 'preview' %}">NEXT</a><br>
+    <p>prompt</p>
+    <p>{{ item.id }} ≫ {{ item.category1 }} ≫ {{ item.category2 }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label>ITEM_ID : </label>
+            <input name="item_id" value="{{ item.id }}" style="width: 215px;">
+        </div>
+        <div>
+            <label>CATEGORY1 : </label>
+            <input name="category1" value="{{ item.category1 }}" style="width: 215px;">
+        </div>
+        <div>
+            <label>CATEGORY2 : </label>
+            <input name="category2" value="{{ item.category2 }}" style="width: 215px;">
+        </div>
+        <div>
+            <label>TITLE : </label>
+            <input name="title" value="デフォルト" style="width: 150px;">
+        </div> 
+        <div>
+            <label>IMG : </label>
+            <input name="img" value="fashion_ai/img/design/sample.png" style="width: 215px;">
+        </div> 
+        <button type="submit">NEXT</button>
+        </form>
+
     <a href="{% url 'select' %}">BACK</a><br>
 </body>
 </html>

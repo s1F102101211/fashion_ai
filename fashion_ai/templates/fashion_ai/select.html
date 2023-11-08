@@ -7,18 +7,37 @@
     <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>SELECT</p>
+    <p>select</p>
     <div>
-        <div class="category"></div>
-        <div class="item">
-            <a href="{% url 'prompt' %}"><span class="item_id">1</span></a>
-            <a href="{% url 'prompt' %}"><span class="item_id">2</span></a>
-            <a href="{% url 'prompt' %}"><span class="item_id">3</span></a>
-            <a href="{% url 'prompt' %}"><span class="item_id">4</span></a>
-            <a href="{% url 'prompt' %}"><span class="item_id">5</span></a>
-            <a href="{% url 'prompt' %}"><span class="item_id">6</span></a>
+        <p class="select_p">TOPS</p>
+        <div class="select_div">
+            {% if tops %}
+            {% for item in tops %}
+            <span class="select_span">
+                <a href="{% url 'prompt' item.id %}" class="select_a">
+                    <img src="{% static item.img %}" width="50px" height="50px">
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
+    <div>
+        <p class="select_p">BOTTOMS</p>
+        <div class="select_div">
+            {% if bottoms %}
+            {% for item in bottoms %}
+            <span class="select_span">
+                <a href="{% url 'prompt' item.id %}" class="select_a">
+                    <img src="{% static item.img %}" width="50px" height="50px">
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    
+    <br>
     <a href="{% url 'home' %}">BACK</a>
 </body>
 </html>
