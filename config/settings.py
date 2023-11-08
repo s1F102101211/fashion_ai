@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'index'  # ログイン後にリダイレクトするURLを指定
+LOGIN_REDIRECT_URL = '/home'  # ログイン後にリダイレクトするURLを指定
 
 LOGGING = {
     'version': 1,
