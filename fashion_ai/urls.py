@@ -20,4 +20,5 @@ urlpatterns = [
     path('update_item/<int:id>', views.update_item, name='update_item'),
     path('delete_item/<int:id>', views.delete_item, name='delete_item'),
 	path('generate_prompt', views.generate_prompt, name='generate_prompt'),
+    path('stable',views.stable, name= 'stable'),
 ]

@@ -193,3 +193,6 @@ def generate_prompt(request):
         'chat_results': chat_results
     }    
     return HttpResponse(template.render(context, request))
+
+def stable(request):
+        return render(request, 'fashion_ai/stable.html', context)
