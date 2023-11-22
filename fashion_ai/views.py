@@ -7,6 +7,15 @@ from fashion_ai.models import Item, Design
 import openai
 import environ
 
+from .forms import StableForm
+from dotenv import load_dotenv
+import os
+import io
+import warnings
+from PIL import Image
+from stability_sdk import client
+import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
+
 def index(request):
     template = loader.get_template('fashion_ai/index.html')
     context = {
@@ -195,4 +204,118 @@ def generate_prompt(request):
     return HttpResponse(template.render(context, request))
 
 def stable(request):
+    if request.method == "POST":
+        # 画像生成ボタン押下時
+
+        form = StableForm(request.POST)
+        #formに入力されている場合の処理
+        if form.is_valid():
+
+            #Formのクリア
+            sentence = form.cleaned_data['sentence']
+
+            #seedの初期値
+            number = 1
+
+			#STABILITY_KEYの設定
+            STABILITY_KEY = ''
+            os.environ['STABILITY_KEY'] = STABILITY_KEY
+
+            # .env ファイルから環境変数をロードする
+            load_dotenv()
+
+            # 環境変数からAPIキーを取得する
+            stability_api_key = os.environ.get('STABILITY_KEY')
+
+            # STABLITY_HOST（APIホストのURL）の設定
+            # gRPCプロトコルを使用してStability.AIのサービスに接続
+            os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
+
+        
+            # Stability.AIプラットフォームの生成モデルにアクセスするためのクライアントの設定
+            stability_api = client.StabilityInference(
+                key=os.environ['STABILITY_KEY'], # API キー
+                verbose=True, # デバッグメッセージの出力するための設定
+                engine="stable-diffusion-512-v2-1", # 生成に使用するエンジンの設定
+            )
+
+
+            # 利用可能なエンジンについては、https://platform.stability.ai/pricing を参照してください。
+            #   画像サイズとステップ数に応じてクレジットが必要
+
+
+            # 上記のクライアントを使用した画像生成するためのリクエスト
+            answers = stability_api.generate(
+                prompt=sentence,
+                    #A white mixed breed of Pomeranian and Chihuahua is riding a surfboard in the style of anime
+                    #prompt="生成したい画像のプロンプト",
+                seed=number,
+                    # 乱数生成の初期値(画像の番号)
+                    # 同じシードを使用すると、生成される画像が再現可能
+                steps=50, 
+                    # 画像生成時に実行される推論ステップの数。
+                    # デフォルトは30.
+                cfg_scale=8.0, 
+                    # プロンプトと生成画像の一致度を調整するためのパラメータ                         
+                    # デフォルトは7.0
+                width=512, 
+                    # 生成画像の幅
+                    # デフォルトは 512 または 1024 
+                height=512,
+                    # 生成画像の高さ
+                    # デフォルトは 512 または 1024
+                samples=1, 
+                    # 生成する画像の数
+                    # デフォルトは 1 です。
+                sampler=generation.SAMPLER_K_DPMPP_2M 
+                    # ノイズを除去するサンプラーを選択します
+                    # デフォルトは k_dpmpp_2m
+                )
+
+
+            # Stability.AIからの応答に含まれる生成画像の処理
+            for resp in answers:
+                for artifact in resp.artifacts:
+                    # 必要に応じて警告メッセージを表示
+                    if artifact.finish_reason == generation.FILTER:
+                        warnings.warn(
+                        "Your request activated the API's safety filters"
+                        "  and could not be processed."
+                        "Please modify the prompt and try again.")
+                
+                    # 画像保存
+                    if artifact.type == generation.ARTIFACT_IMAGE:
+                        img = Image.open(io.BytesIO(artifact.binary))
+                                   
+                        # 保存先ディレクトリを指定します。
+                        save_directory = "C:fashion_ai/static/fashion_ai/img/photo/"
+                        # C:/Users/iniad/Documents/fashion_stable/fashionstable/static/fashionstable/img/
+
+                        # 画像を指定のディレクトリに保存します。
+                        file_path = os.path.join(save_directory, str(artifact.seed) + ".png")
+                        print("file_path ", file_path)
+                        print("file_path ", os.path.abspath(file_path))
+                        img.save(file_path)
+
+
+        # 生成された画像の保存パスを取得するロジックをここに追加します
+        form = StableForm()
+        image_path = str(artifact.seed) +".png"  # 生成された画像の実際のファイルパス
+
+        context = {
+            'form': form,
+            'image_path': image_path,
+        }
+        number += 1
+        print(number)
+        return render(request, 'fashion_ai/stable.html', context)
+
+    else: 
+        form = StableForm()
+        image_path =  "sample.png"  
+
+        context = {
+            'form': form,
+            'image_path': image_path,
+        }
         return render(request, 'fashion_ai/stable.html', context)
