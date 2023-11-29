@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
 </head>
 <body>
-    <h1>画像出力</h1>
+   <h1>画像出力</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">画像生成</button>
+    </form>
+
+    {% with '/fashion_ai/img/photo/'|add:image_path as image_static %}
+    <img src="{% static image_static %}" alt="Generated Image">
+    {% endwith %}
 
 
 </body>
