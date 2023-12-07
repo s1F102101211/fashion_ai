@@ -4,15 +4,37 @@
     {% load static %}
     <meta charset = "utf-8">
     <title>generate_prompt</title>
+    <style>
+        .item {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .green-background {
+            background-color: green;
+            color: white;
+        }
+
+        .white-background {
+            background-color: white;
+        }
+    </style>
+    
     <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
 </head>
 <body>
+    {% for item in chat_results %}
+        {% if forloop.counter0|divisibleby:2 %}
+            <p class="item white-background">{{ item }}</p>
+        {% else %}
+            <p class="item green-background" style="text-align: right;">{{ item }}</p>
+        {% endif %}
+    {% endfor %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">ChatGPT</button>
+        <button type="submit"onclick="disabled = true;">ChatGPT</button>
     </form>
 
-    {{ chat_results }}
 </body>
 </html>
