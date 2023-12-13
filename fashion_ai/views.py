@@ -159,17 +159,17 @@ def delete_item(request, id):
     return redirect(data)
 
 
+chat_results = ["どんなデザインにしたいですか？"]
 def generate_prompt(request):
-    chat_results = ""
     #formに入力されている場合の処理
     if request.method == "POST":
         # ChatGPTボタン押下時
-
         form = ChatForm(request.POST)
         #formに入力されている場合の処理
         if form.is_valid():
 
             sentence = form.cleaned_data['sentence']
+            chat_results.append(sentence)
 
             # OpenAI APIキー設定    
             env = environ.Env()
@@ -177,6 +177,21 @@ def generate_prompt(request):
             openai.api_key =env('API_KEY')
             openai.api_base = "https://api.openai.iniad.org/api/v1"
             # ChatGPT
+            messages=[
+                {
+                    "role": "system",
+                    "content": "あなたは服のデザインをユーザと一緒に考えます。考えた画像をAIで生成するためのプロンプトを日本語で出力してください"
+                },
+                
+            ]
+            for i, item in enumerate(chat_results):
+                messages.append(
+                    {
+                        "role": "assistant" if i % 2 == 0 else "user",
+                        "content": item
+                    },
+                )
+			
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
@@ -190,8 +205,8 @@ def generate_prompt(request):
                     },
                 ],
             )
-
-            chat_results = response["choices"][0]["message"]["content"]
+            print(messages)
+            chat_results.append(response["choices"][0]["message"]["content"])
 
     #formに入力されていない場合の処理->初期表示
     else:
