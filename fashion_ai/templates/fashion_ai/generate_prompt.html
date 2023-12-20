@@ -2,7 +2,7 @@
 <html>
 <head>
     {% load static %}
-    <meta charset = "utf-8">
+    <meta charset="utf-8">
     <title>generate_prompt</title>
     <style>
         .item {
@@ -30,11 +30,16 @@
             <p class="item green-background" style="text-align: right;">{{ item }}</p>
         {% endif %}
     {% endfor %}
-    <form method="POST">
+    <form method="POST" id="submitForm" onsubmit="disableButton()">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit"onclick="disabled = true;">ChatGPT</button>
+        <button id="submit" type="submit">ChatGPT</button>
     </form>
 
+    <script>
+        function disableButton() {
+            document.getElementById("submit").disabled = true;
+        }
+    </script>
 </body>
 </html>
