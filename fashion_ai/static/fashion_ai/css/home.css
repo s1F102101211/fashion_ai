@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  background: linear-gradient(135deg, #50B5C4 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeIn 1s ease-in-out; /* ロゴのフェードインアニメーション */
+}
+
+.logo img {
+  width: 250px; /* ロゴ画像の幅 */
+}
+
+.menu {
+  text-align: center;
+  color: #fff;
+}
+
+.menu a {
+  display: block;
+  margin: 20px auto;
+  padding: 15px 30px;
+  text-decoration: none;
+  color: #ffffff;
+  background: #50B5C4;
+  border-radius: 25px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+  width: fit-content;
+}
+
+.menu a:hover {
+  transform: scale(1.05);
+}
+
+/* CREATEリンクのスタイル */
+.menu a:nth-child(1) {
+  color: #50B5C4;
+  background: #ffffff; /* 変更したい色 */
+  font-weight: bold; /* 強調 */
+  animation: fadeIn 1s ease-in-out; /* フェードインアニメーション */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

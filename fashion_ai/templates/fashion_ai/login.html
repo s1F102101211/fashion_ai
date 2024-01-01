@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% load static %}
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
+  <meta charset="UTF-8">
+  {% load static %}
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'fashion_ai/css/login.css' %}">
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.username.label_tag }}
-            {{ form.username }}
-        </div>
-        <div class="form-group">
-            {{ form.password.label_tag }}
-            {{ form.password }}
-        </div>
-        <button type="submit">Login</button>
-    </form>
+  <div class="main-bg"></div> 
+  <h2>LOGIN</h2>
+  
+  <form method="post">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <button type="submit">LOGIN</button>
+  </form>
 </body>
 </html>
+

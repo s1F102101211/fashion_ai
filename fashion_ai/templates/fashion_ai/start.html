@@ -4,10 +4,16 @@
 <head>
     <meta charset = "utf-8">
     <title>start</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/start.css' %}">
 </head>
 <body>
-    <p>START</p>
-    <a href="{% url 'login' %}">LOG IN</a><br>
+    <div class="container">
+        <img src="static\fashion_ai\img\logo\logo.png">
+        <h1 class="title-slide-in">Welcome!</h1>
+        <h2 class="text-fade-in">Design your imagination.</h2>
+    </div>
+      
+    <a href="{% url 'login' %}">LOGIN</a><br>
 </body>
 </html>
+

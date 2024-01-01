@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; /* 背景エフェクトのためにoverflowをhiddenに設定 */
+  background: linear-gradient(135deg, #50B5C4 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ビューポートの高さいっぱいに背景を表示 */
+  position: relative; /* h2 の絶対位置をbodyに対して決定 */
+}
+
+h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 36px;
+  position: absolute; /* h2 を絶対位置に配置 */
+  top: 30px; /* 画面上部からの距離 */
+  left: 50%; /* 中央に配置するための調整 */
+  transform: translateX(-50%); /* 中央に移動 */
+  width: 100%; /* 幅を100%にして親要素の幅いっぱいに表示 */
+  margin: 0; /* 余白をリセット */
+}
+form {
+  width: 300px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8); /* フォームの背景 */
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 影の追加 */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333; /* ラベルの文字色を変更 */
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc; /* ボーダーの追加 */
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  background: #50B5C4;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.05);
+}

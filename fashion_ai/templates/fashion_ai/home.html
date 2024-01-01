@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
 <head>
-    <meta charset = "utf-8">
-    <title>home</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    {% load static %}
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/home.css' %}">
 </head>
 <body>
-    <p>HOME</p>
-    <a href="{% url 'select' %}">CREATE</a><br>
-    <a href="{% url 'original' %}">ORIGINAL</a><br>
-    <a href="{% url 'collection' %}">COLLECTION</a><br>
-    <a href="{% url 'gallery' %}">GALLERY</a><br>
-    <a href="{% url 'start' %}">LOG OUT</a><br>
+    <div class="logo">
+        <img src="{% static 'fashion_ai/img/logo/logo.png' %}" alt="Logo">
+    </div>
+
+    <div class="menu">
+        <a href="{% url 'select' %}">CREATE</a>
+        <a href="{% url 'original' %}">ORIGINAL</a>
+        <a href="{% url 'collection' %}">COLLECTION</a>
+        <a href="{% url 'gallery' %}">GALLERY</a>
+        <a href="{% url 'start' %}">LOGOUT</a>
+    </div>
 </body>
 </html>

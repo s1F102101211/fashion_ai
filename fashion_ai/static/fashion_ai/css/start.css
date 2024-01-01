@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #50B5C4 0%, #ffffff 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; /* 背景エフェクトのためにoverflowをhiddenに設定 */
+}
+
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+  z-index: 1; /* 枠より前面に表示 */
+}
+
+.container img {
+  max-width: 300px;
+}
+
+a {
+  display: block;
+  margin: 30px auto 0;
+  padding: 15px 30px;
+  text-decoration: none;
+  color: #ffffff;
+  background: #50B5C4; /* より濃い色 */
+  border-radius: 25px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+  width: fit-content;
+  animation: slideIn 1s ease-in-out;
+}
+
+a:hover {
+  transform: scale(1.05);
+}
+h1 {
+    color: aliceblue;
+}
+
+/* 全体に広がる背景エフェクト */
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #50B5C4 40%, #ffffff 80%); /* より濃い色 */
+  z-index: -1;
+  animation: backgroundEffect 6s ease-out infinite; /* 繰り返しアニメーション */
+}
+
+/* テキストのフェードイン */
+.text-fade-in {
+  opacity: 0;
+  animation: fadeIn 4s ease-in-out forwards; /* テキストのフェードインアニメーション */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes backgroundEffect {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1000);
+    opacity: 0;
+  }
+}
