@@ -4,6 +4,7 @@ body {
   background: linear-gradient(135deg, #50B5C4 0%, #ffffff 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden; /* 背景エフェクトのためにoverflowをhiddenに設定 */
+  height: 100vh;
 }
 
 
