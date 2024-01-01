@@ -37,8 +37,13 @@ a {
 a:hover {
   transform: scale(1.05);
 }
+
 h1 {
-    color: aliceblue;
+    color: rgb(255, 255, 255);
+}
+
+h2 {
+    color: rgb(99, 121, 121);
 }
 
 /* 全体に広がる背景エフェクト */
