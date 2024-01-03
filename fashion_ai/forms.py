@@ -2,7 +2,7 @@ from django import forms
 
 class ChatForm(forms.Form):
 
-    sentence = forms.CharField(label='チャット', widget=forms.Textarea(), required=True)
+    sentence = forms.CharField(label='ユーザー', widget=forms.Textarea(), required=True)
 
 class StableForm(forms.Form):
     

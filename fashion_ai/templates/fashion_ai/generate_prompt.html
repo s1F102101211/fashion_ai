@@ -33,7 +33,7 @@
     <form method="POST" id="submitForm" onsubmit="disableButton()">
         {% csrf_token %}
         {{ form.as_p }}
-        <button id="submit" type="submit">ChatGPT</button>
+        <button id="submit" type="submit">送信</button>
     </form>
 
     <script>
@@ -41,5 +41,10 @@
             document.getElementById("submit").disabled = true;
         }
     </script>
+
+    {% with '/fashion_ai/img/photo/'|add:image_path as image_static %}
+    <img src="{% static image_static %}" alt="Generated Image">
+    {% endwith %}
+
 </body>
 </html>
