@@ -8,10 +8,29 @@
 </head>
 <body>
     <p>preview</p>
-    <p>{{ design.item_id }} ≫ {{ design.category1 }} ≫ {{ design.category2 }}</p>
-    <p>{{ design.title }} / {{ design.date }}</p>
-    <img src="{% static design.img %}" width="50px" height="50px"><br>
-    <a href="{% url 'home' %}">COMPLETE</a><br>
-    <a href="{% url 'prompt' design.item_id %}">BACK</a><br>
+    <img src="{{ img }}"><br>
+
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label>category : </label>
+            <select name="category" style="width: 158px; height: 22px;">
+                <option value="トップス">トップス</option>
+                <option value="アウター">アウター</option>
+                <option value="その他">その他</option>
+            </select>
+        </div>
+        <div>
+            <label>title : </label>
+            <input name="title" style="width: 150px;">
+        </div>
+        <div>
+            <label>path : </label>
+            <input name="path" value="fashion_ai/img/design/sample.png" style="width: 215px;">
+        </div>
+        <button type="submit">COMPLETE</button>
+    </form>
+
+    <a href="{% url 'select'  %}">BACK</a><br>
 </body>
 </html>

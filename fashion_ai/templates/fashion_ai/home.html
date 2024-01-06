@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
-    {% load static %}
-    <meta charset="utf-8">
-    <title>Home</title>
+    <meta charset = "utf-8">
+    <title>home</title>
     <link rel="stylesheet" href="{% static 'fashion_ai/css/home.css' %}">
 </head>
 <body>
@@ -12,10 +12,10 @@
     </div>
 
     <div class="menu">
-        <a href="{% url 'select' %}">CREATE</a>
-        <a href="{% url 'original' %}">ORIGINAL</a>
-        <a href="{% url 'collection' %}">COLLECTION</a>
+        <a href="{% url 'prompt' %}">CREATE</a>
+        <a href="{% url 'mydesign' %}">MYDESIGN</a>
         <a href="{% url 'gallery' %}">GALLERY</a>
+        <a href="{% url 'favorite' %}">FAVORITE</a>
         <a href="{% url 'start' %}">LOGOUT</a>
     </div>
 </body>

@@ -14,8 +14,8 @@
             {% if tops %}
             {% for item in tops %}
             <span class="select_span">
-                <a href="{% url 'prompt' item.id %}" class="select_a">
-                    <img src="{% static item.img %}" width="50px" height="50px">
+                <a href="{% url 'preview' item.name item.size item.x item.y %}" class="select_a">
+                    <img src="{% static item.path %}" width="50px" height="50px">
                 </a>
             </span>
             {% endfor %}
@@ -23,13 +23,27 @@
         </div>
     </div>
     <div>
-        <p class="select_p">BOTTOMS</p>
+        <p class="select_p">OUTER</p>
         <div class="select_div">
-            {% if bottoms %}
-            {% for item in bottoms %}
+            {% if outer %}
+            {% for item in outer %}
             <span class="select_span">
-                <a href="{% url 'prompt' item.id %}" class="select_a">
-                    <img src="{% static item.img %}" width="50px" height="50px">
+                <a href="{% url 'preview' item.name item.size item.x item.y %}" class="select_a">
+                    <img src="{% static item.path %}" width="50px" height="50px">
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <p class="select_p">OTHER</p>
+        <div class="select_div">
+            {% if other %}
+            {% for item in other %}
+            <span class="select_span">
+                <a href="{% url 'preview' item.name item.size item.x item.y %}" class="select_a">
+                    <img src="{% static item.path %}" width="50px" height="50px">
                 </a>
             </span>
             {% endfor %}
@@ -37,7 +51,8 @@
         </div>
     </div>
     
+    
     <br>
-    <a href="{% url 'home' %}">BACK</a>
+    <a href="{% url 'prompt' %}">BACK</a>
 </body>
 </html>

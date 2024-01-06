@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
 <head>
-    <meta charset = "utf-8">
+    {% load static %}
+    <meta charset="utf-8">
     <title>prompt</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    <style>
+        .item {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .green-background {
+            background-color: green;
+            color: white;
+        }
+
+        .white-background {
+            background-color: white;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
 </head>
 <body>
-    <p>prompt</p>
-    <p>{{ item.id }} ≫ {{ item.category1 }} ≫ {{ item.category2 }}</p>
-
-    <form method="post">
+    {% for item in chat_results %}
+        {% if forloop.counter0|divisibleby:2 %}
+            <p class="item white-background">{{ item }}</p>
+        {% else %}
+            <p class="item green-background" style="text-align: right;">{{ item }}</p>
+        {% endif %}
+    {% endfor %}
+    <form method="POST" id="submitForm" onsubmit="disableButton()">
         {% csrf_token %}
-        <div>
-            <label>ITEM_ID : </label>
-            <input name="item_id" value="{{ item.id }}" style="width: 215px;">
-        </div>
-        <div>
-            <label>CATEGORY1 : </label>
-            <input name="category1" value="{{ item.category1 }}" style="width: 215px;">
-        </div>
-        <div>
-            <label>CATEGORY2 : </label>
-            <input name="category2" value="{{ item.category2 }}" style="width: 215px;">
-        </div>
-        <div>
-            <label>TITLE : </label>
-            <input name="title" value="デフォルト" style="width: 150px;">
-        </div> 
-        <div>
-            <label>IMG : </label>
-            <input name="img" value="fashion_ai/img/design/sample.png" style="width: 215px;">
-        </div> 
-        <button type="submit">NEXT</button>
-        </form>
+        {{ form.as_p }}
+        <button id="submit" type="submit">送信</button>
+    </form>
 
-    <a href="{% url 'select' %}">BACK</a><br>
+    <script>
+        function disableButton() {
+            document.getElementById("submit").disabled = true;
+        }
+    </script>
+
+    {% with '/fashion_ai/img/photo/'|add:image_path as image_static %}
+    <img src="{% static image_static %}" alt="Generated Image">
+    {% endwith %}
+
 </body>
 </html>

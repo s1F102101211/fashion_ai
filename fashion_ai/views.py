@@ -31,139 +31,10 @@ def start(request):
 def home(request):
 	return render(request, 'fashion_ai/home.html')
 
-def select(request):
-	context = {
-		"tops" : Item.objects.filter(category1="トップス"),
-		"bottoms" : Item.objects.filter(category1="ボトムス"),
-		"outers" : Item.objects.filter(category1="アウター"),
-		"others" : Item.objects.exclude(category1__in=["トップス","ボトムス","アウター"]),
-	}
-	return render(request, 'fashion_ai/select.html', context)
-
-def prompt(request, id):
-	try:
-		item = Item.objects.get(pk=id)
-	except Item.DoesNotExist:
-		raise Http404()
-	if request.method == 'POST':
-		design=Design()
-		design.item_id = request.POST['item_id']
-		design.category1 = request.POST['category1']
-		design.category2 = request.POST['category2']
-		design.title = request.POST['title']
-		design.img = request.POST['img']
-		design.save()
-		return redirect(preview, design.id)
-	
-	context = {
-		"item" : item,
-	}
-	return render(request, 'fashion_ai/prompt.html', context)
-
-def preview(request, id):
-	try:
-		design = Design.objects.get(pk=id)
-	except Design.DoesNotExist:
-		raise Http404()
-	
-	context = {
-		"design" : design
-	}
-	return render(request, 'fashion_ai/preview.html', context)
-
-def original(request):
-	context = {
-		"tops" : Design.objects.filter(category1="トップス"),
-		"bottoms" : Design.objects.filter(category1="ボトムス"),
-		"outers" : Design.objects.filter(category1="アウター"),
-		"others" : Design.objects.exclude(category1__in=["トップス","ボトムス","アウター"]),
-	}
-	return render(request, 'fashion_ai/original.html', context)
-
-def update_design(request, id):
-	try:
-		design = Design.objects.get(pk=id)
-	except Design.DoesNotExist:
-		raise Http404()
-	if request.method == 'POST':
-		design.title = request.POST['title']
-		design.save()
-		return redirect(original)
-	
-	context = {
-        "design" : design,
-		"tops" : Design.objects.filter(category1="トップス"),
-		"bottoms" : Design.objects.filter(category1="ボトムス"),
-		"outers" : Design.objects.filter(category1="アウター"),
-		"others" : Design.objects.exclude(category1__in=["トップス","ボトムス","アウター"]),
-    }
-	return render(request, 'fashion_ai/original.html', context)
-
-def delete_design(request, id):
-    try:
-        design = Design.objects.get(pk=id)
-    except Design.DoesNotExist:
-        raise Http404()
-    design.delete()
-    return redirect(original)
-
-def collection(request):
-	return render(request, 'fashion_ai/collection.html')
-
-def gallery(request):
-	return render(request, 'fashion_ai/gallery.html')
-
-
-def data(request):
-	if request.method == 'POST':
-		item=Item()
-		item.category1 = request.POST['category1']
-		item.category2 = request.POST['category2']
-		item.img = request.POST['img']
-		item.save()
-		return redirect(data)
-
-	context = {
-		"tops" : Item.objects.filter(category1="トップス"),
-		"bottoms" : Item.objects.filter(category1="ボトムス"),
-		"outers" : Item.objects.filter(category1="アウター"),
-		"others" : Item.objects.exclude(category1__in=["トップス","ボトムス","アウター"]),
-	}
-	return render(request, 'fashion_ai/data.html', context)
-
-def update_item(request, id):
-	try:
-		item = Item.objects.get(pk=id)
-	except Item.DoesNotExist:
-		raise Http404()
-	if request.method == 'POST':
-		item.category1 = request.POST['category1']
-		item.category2 = request.POST['category2']
-		item.img = request.POST['img']
-		item.save()
-		return redirect(data)
-	
-	context = {
-        "item" : item,
-		"tops" : Item.objects.filter(category1="トップス"),
-		"bottoms" : Item.objects.filter(category1="ボトムス"),
-		"outers" : Item.objects.filter(category1="アウター"),
-		"others" : Item.objects.exclude(category1__in=["トップス","ボトムス","アウター"]),
-    }
-	return render(request, 'fashion_ai/data.html', context)
-
-def delete_item(request, id):
-    try:
-        item = Item.objects.get(pk=id)
-    except Item.DoesNotExist:
-        raise Http404()
-    item.delete()
-    return redirect(data)
-
 
 chat_results = ["どんなデザインにしたいですか？"]
 image = []
-def generate_prompt(request):
+def prompt(request):
     #formに入力されている場合の処理
     if request.method == "POST":
         # ChatGPTボタン押下時
@@ -364,7 +235,7 @@ def generate_prompt(request):
     else:
         form = ChatForm()
         image_path = "sample.png"
-    template = loader.get_template('fashion_ai/generate_prompt.html')
+    template = loader.get_template('fashion_ai/prompt.html')
     context = {
         'form': form,
         'chat_results': chat_results,
@@ -372,6 +243,127 @@ def generate_prompt(request):
     }    
     return HttpResponse(template.render(context, request))
 
+
+def select(request):
+	context = {
+		"tops"  : Item.objects.filter(category="トップス"),
+		"outer" : Item.objects.filter(category="アウター"),
+		"other" : Item.objects.exclude(category__in=["トップス","アウター"]),
+	}
+	return render(request, 'fashion_ai/select.html', context)
+
+def preview(request, name, size, x, y):
+    if request.method == 'POST':
+        design=Design()
+        design.title = request.POST['title']
+        design.path = request.POST['path']
+        design.category = request.POST['category']
+        design.save()
+        os.rename('fashion_ai/static/fashion_ai/img/design/result.png', 'fashion_ai/static/' + design.path)
+        return redirect(home)
+
+    item = Image.open('fashion_ai/static/fashion_ai/img/item/' + name + '.png')
+    photo = Image.open('fashion_ai/static/fashion_ai/img/photo/1.png')
+    photo = photo.resize((size, size))
+    item.paste(photo, (x,y))
+    item.save('fashion_ai/static/fashion_ai/img/design/result.png')
+
+    context = {
+        'img': '/static/fashion_ai/img/design/result.png'
+    }
+    return render(request, 'fashion_ai/preview.html', context)
+
+def mydesign(request):
+	context = {
+		"tops" : Design.objects.filter(category="トップス"),
+		"outer" : Design.objects.filter(category="アウター"),
+		"other" : Design.objects.exclude(category__in=["トップス","アウター"]),
+	}
+	return render(request, 'fashion_ai/mydesign.html', context)
+
+def update_design(request, id):
+	try:
+		design = Design.objects.get(pk=id)
+	except Design.DoesNotExist:
+		raise Http404()
+	if request.method == 'POST':
+		design.title = request.POST['title']
+		design.save()
+		return redirect(mydesign)
+	
+	context = {
+        "design": design,
+		"tops"  : Design.objects.filter(category="トップス"),
+		"outer" : Design.objects.filter(category="アウター"),
+		"other" : Design.objects.exclude(category__in=["トップス","アウター"]),
+    }
+	return render(request, 'fashion_ai/mydesign.html', context)
+
+def delete_design(request, id):
+    try:
+        design = Design.objects.get(pk=id)
+    except Design.DoesNotExist:
+        raise Http404()
+    design.delete()
+    return redirect(mydesign)
+
+def gallery(request):
+	return render(request, 'fashion_ai/gallery.html')
+
+def favorite(request):
+	return render(request, 'fashion_ai/favorite.html')
+
+
+
+def data(request):
+	if request.method == 'POST':
+		item=Item()
+		item.category = request.POST['category']
+		item.name = request.POST['name']
+		item.path = request.POST['path']
+		item.size = request.POST['size']
+		item.x = request.POST['x']
+		item.y = request.POST['y']
+		item.save()
+		return redirect(data)
+
+	context = {
+		"tops"  : Item.objects.filter(category="トップス"),
+		"outer" : Item.objects.filter(category="アウター"),
+		"other" : Item.objects.exclude(category__in=["トップス","アウター"]),
+	}
+	return render(request, 'fashion_ai/data.html', context)
+
+def update_item(request, id):
+	try:
+		item = Item.objects.get(pk=id)
+	except Item.DoesNotExist:
+		raise Http404()
+	if request.method == 'POST':
+		item.category = request.POST['category']
+		item.name = request.POST['name']
+		item.path = request.POST['path']
+		item.size = request.POST['size']
+		item.x = request.POST['x']
+		item.y = request.POST['y']
+		item.save()
+		return redirect(data)
+	
+	context = {
+        "item"  : item,
+		"tops"  : Item.objects.filter(category="トップス"),
+		"outer" : Item.objects.filter(category="アウター"),
+		"other" : Item.objects.exclude(category__in=["トップス","アウター"]),
+    }
+	return render(request, 'fashion_ai/data.html', context)
+
+def delete_item(request, id):
+    try:
+        item = Item.objects.get(pk=id)
+    except Item.DoesNotExist:
+        raise Http404()
+    item.delete()
+    return redirect(data)
 
 def stable(request):
     if request.method == "POST":
@@ -494,3 +486,16 @@ def stable(request):
             'image_path': image_path,
         }
         return render(request, 'fashion_ai/stable.html', context)
+    
+def collage(request):
+    item = Image.open('fashion_ai/static/fashion_ai/img/item/shirt_1.png')
+    photo = Image.open('fashion_ai/static/fashion_ai/img/photo/1.png')
+    photo = photo.resize((200, 200))
+    item.paste(photo, (156,180))
+    item.save('fashion_ai/static/fashion_ai/img/design/result.png')
+
+    context = {
+        'img': '/static/fashion_ai/img/design/result.png'
+    }
+    
+    return render(request, 'fashion_ai/collage.html', context)

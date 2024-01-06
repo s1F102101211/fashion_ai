@@ -3,11 +3,11 @@
 {% load static %}
 <head>
     <meta charset = "utf-8">
-    <title>original</title>
+    <title>mydesign</title>
     <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
 </head>
 <body>
-    <p>original</p>
+    <p>mydesign</p>
 
     {% if design %}
         <form method="post">
@@ -32,7 +32,7 @@
         {% for design in tops %}
         <span class="data_span">
             <div class="left" style="height: 50px;">
-                <img src="{% static design.img %}" width="50px" height="50px">
+                <img src="{% static design.path %}" width="50px" height="50px">
             </div>
             <div class="right">
                 <p class="data_p">{{ design.title }}</p>
@@ -46,13 +46,33 @@
         {% endif %}
     </div>
 
-    <p class="data_p">ボトムス</p>
+    <p class="data_p">アウター</p>
     <div class="data_div">
-        {% if bottoms %}
-        {% for design in bottoms %}
+        {% if outer %}
+        {% for design in outer %}
         <span class="data_span">
             <div class="left" style="height: 50px;">
-                <img src="{% static design.img %}" width="50px" height="50px">
+                <img src="{% static design.path %}" width="50px" height="50px">
+            </div>
+            <div class="right">
+                <p class="data_p">{{ design.title }}</p>
+                <a href="{% url 'update_design' design.id %}">編集</a>
+                <a href="{% url 'delete_design' design.id %}">削除</a>
+            </div>
+        </span>
+        {% endfor %}
+        {% else %}
+        <p style="margin: 5px; height: 60px;">empty</p>
+        {% endif %}
+    </div>
+
+    <p class="data_p">その他</p>
+    <div class="data_div">
+        {% if other %}
+        {% for design in other %}
+        <span class="data_span">
+            <div class="left" style="height: 50px;">
+                <img src="{% static design.path %}" width="50px" height="50px">
             </div>
             <div class="right">
                 <p class="data_p">{{ design.title }}</p>
