@@ -255,9 +255,9 @@ def select(request):
 def preview(request, name, size, x, y):
     if request.method == 'POST':
         design=Design()
+        design.category = request.POST['category']
         design.title = request.POST['title']
         design.path = request.POST['path']
-        design.category = request.POST['category']
         design.save()
         os.rename('fashion_ai/static/fashion_ai/img/design/result.png', 'fashion_ai/static/' + design.path)
         return redirect(home)
@@ -288,15 +288,14 @@ def update_design(request, id):
 	except Design.DoesNotExist:
 		raise Http404()
 	if request.method == 'POST':
+		design.category = request.POST['category']
 		design.title = request.POST['title']
+		design.path = request.POST['path']
 		design.save()
-		return redirect(mydesign)
+		return render(request, 'fashion_ai/detail.html', context)
 	
 	context = {
         "design": design,
-		"tops"  : Design.objects.filter(category="トップス"),
-		"outer" : Design.objects.filter(category="アウター"),
-		"other" : Design.objects.exclude(category__in=["トップス","アウター"]),
     }
 	return render(request, 'fashion_ai/mydesign.html', context)
 
