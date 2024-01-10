@@ -28,7 +28,7 @@ body {
 
 .menu a {
   display: block;
-  margin: 20px auto;
+  margin: 10px 50px auto;
   padding: 15px 30px;
   text-decoration: none;
   color: #ffffff;
@@ -37,7 +37,8 @@ body {
   font-size: 20px;
   letter-spacing: 1px;
   transition: transform 0.3s ease;
-  width: fit-content;
+  width: 100px;
+  animation: fadeIn 1s ease-in-out; /* フェードインアニメーション */
 }
 
 .menu a:hover {
