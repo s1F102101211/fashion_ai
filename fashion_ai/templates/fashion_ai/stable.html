@@ -4,7 +4,7 @@
 <head>
     <meta charset = "utf-8">
     <title>stable</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/sample.css' %}">
 </head>
 <body>
    <h1>画像出力</h1>
@@ -19,6 +19,7 @@
     <img src="{% static image_static %}" alt="Generated Image">
     {% endwith %}
 
-
+    <br>
+    <a href="{% url 'index' %}">戻る</a>
 </body>
 </html>
