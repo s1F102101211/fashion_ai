@@ -1,0 +1,144 @@
+/* 全体のスタイル */
+body {
+    background: linear-gradient(135deg, #50B5C4 0%, #ffffff 100%);
+    background-attachment: fixed; /* 背景を固定 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* フォームスタイル */
+form {
+    max-width: 400px;
+    width: fit-content;
+    margin-left: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #50B5C4;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.img{
+    width: fit-content;
+    margin-right: auto;
+}
+
+.item {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.chat {
+    width: 100%;
+    margin: 1.5em 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.green-background {
+    background-color: green;
+    color: white;
+    border-radius: 12px; /*丸みの強さ*/
+    position: relative; 
+    width: fit-content;
+    margin-left: auto;
+    padding: 17px 13px;
+    text-align: right;
+    justify-content: flex-end; /* 右端に配置する */
+    align-items: center; /* 垂直方向に中央揃え */
+    display: flex; /* フレックスコンテナにする */
+}
+
+.green-background:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 18px; /*三角の位置(高さ)を変更*/
+    right: -24px;
+    border: 12px solid transparent;
+    border-left: 12px solid green; /*三角部分のカラーはここで変更*/
+}
+
+.white-background {
+    background-color: white;
+    border-radius: 12px; /*角*/
+    position: relative; 
+    width: fit-content;
+    margin-right: auto;
+    padding: 17px 13px;
+    flex-direction: row; /* 左から右に並べる */
+}
+
+.white-background:after {
+    content: "";
+    position: absolute;
+    top: 18px; /*三角の位置(高さ)を変更*/
+    left: -24px;
+    border: 12px solid transparent;
+    border-right: 12px solid white; /*三角部分のカラーはここで変更*/
+}
+
+/* チャット結果スタイル */
+#chat_results {
+    margin-top: 20px;
+}
+
+/* チャット */
+#chat {
+    margin-top: 20px;
+}
+
+/* インプットフィールドとテキストエリアスタイル */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* CSRFトークンスタイル（Djangoフォーム用） */
+input[type="hidden"][name="csrfmiddlewaretoken"] {
+    display: none;
+}
+
+/* menu */
+.menu {
+    text-align: center;
+    color: #fff;
+    width: fit-content;
+    margin-right: auto;
+  }
+  
+  .menu a {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #ffffff;
+    background: #50B5C4;
+    border-radius: 25px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+    width: fit-content;
+  }
+  
+  .menu a:hover {
+    transform: scale(1.05);
+  }

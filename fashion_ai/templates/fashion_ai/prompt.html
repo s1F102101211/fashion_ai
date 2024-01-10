@@ -4,23 +4,8 @@
     {% load static %}
     <meta charset="utf-8">
     <title>prompt</title>
-    <style>
-        .item {
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .green-background {
-            background-color: green;
-            color: white;
-        }
-
-        .white-background {
-            background-color: white;
-        }
-    </style>
     
-    <link rel="stylesheet" href="{% static 'fashion_ai/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/prompt.css' %}">
 </head>
 <body>
     {% for item in chat_results %}
@@ -45,6 +30,11 @@
     {% with '/fashion_ai/img/photo/'|add:image_path as image_static %}
     <img src="{% static image_static %}" alt="Generated Image">
     {% endwith %}
+
+    <div class="menu">
+    <a href="{% url 'select' %}">select</a><br>
+    </div>
+
 
 </body>
 </html>
