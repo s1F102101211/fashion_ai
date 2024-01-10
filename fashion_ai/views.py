@@ -275,7 +275,8 @@ def preview(request, name, size, x, y):
 
 def mydesign(request):
 	context = {
-		"tops" : Design.objects.filter(category="トップス"),
+		"design": Design.objects.all(),
+        "tops"  : Design.objects.filter(category="トップス"),
 		"outer" : Design.objects.filter(category="アウター"),
 		"other" : Design.objects.exclude(category__in=["トップス","アウター"]),
 	}

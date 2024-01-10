@@ -4,87 +4,43 @@
 <head>
     <meta charset = "utf-8">
     <title>mydesign</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/mydesign.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 </head>
 <body>
     <p>mydesign</p>
 
-    {% if design %}
-        <form method="post">
-        {% csrf_token %}
-        <div class="left">
-            <label>TITLE : </label>
-            <input name="title" value="{{ design.title }}" style="width: 150px; height: 20px;">
-        </div>     
-        <button class="right" type="submit">更新</button>
-        </form><br>
-    {% else %}
-        <div class="left">
-            <label>TITLE : </label>
-            <input disabled style="width: 150px; height: 20px;">
-        </div>     
-        <button class=" right none">更新</button><br><br>
-    {% endif %}
-
-    <p class="data_p">トップス</p>
-    <div class="data_div">
-        {% if tops %}
-        {% for design in tops %}
-        <span class="data_span">
-            <div class="left" style="height: 50px;">
-                <img src="{% static design.path %}" width="50px" height="50px">
-            </div>
-            <div class="right">
-                <p class="data_p">{{ design.title }}</p>
-                <a href="{% url 'update_design' design.id %}">編集</a>
-                <a href="{% url 'delete_design' design.id %}">削除</a>
-            </div>
-        </span>
+    <div class="contents">
+        <ul class="slider">
+        {% if design %}
+        {% for item in design %}
+        <li><img src="{% static item.path %}"></li>
         {% endfor %}
         {% else %}
-        <p style="margin: 5px; height: 60px;">empty</p>
+        <p>empty</p>
         {% endif %}
+        </ul>
     </div>
 
-    <p class="data_p">アウター</p>
-    <div class="data_div">
-        {% if outer %}
-        {% for design in outer %}
-        <span class="data_span">
-            <div class="left" style="height: 50px;">
-                <img src="{% static design.path %}" width="50px" height="50px">
-            </div>
-            <div class="right">
-                <p class="data_p">{{ design.title }}</p>
-                <a href="{% url 'update_design' design.id %}">編集</a>
-                <a href="{% url 'delete_design' design.id %}">削除</a>
-            </div>
-        </span>
-        {% endfor %}
-        {% else %}
-        <p style="margin: 5px; height: 60px;">empty</p>
-        {% endif %}
-    </div>
-
-    <p class="data_p">その他</p>
-    <div class="data_div">
-        {% if other %}
-        {% for design in other %}
-        <span class="data_span">
-            <div class="left" style="height: 50px;">
-                <img src="{% static design.path %}" width="50px" height="50px">
-            </div>
-            <div class="right">
-                <p class="data_p">{{ design.title }}</p>
-                <a href="{% url 'update_design' design.id %}">編集</a>
-                <a href="{% url 'delete_design' design.id %}">削除</a>
-            </div>
-        </span>
-        {% endfor %}
-        {% else %}
-        <p style="margin: 5px; height: 60px;">empty</p>
-        {% endif %}
-    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $('.slider').slick({
+            autoplay: true,
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            prevArrow: '<div class="slick-prev"></div>',
+            nextArrow: '<div class="slick-next"></div>',
+            dots: true,
+            responsive: [{
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }]
+        });
+    </script>
 
     <a href="{% url 'home' %}">BACK</a><br>
 </body>
