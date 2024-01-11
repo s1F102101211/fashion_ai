@@ -1,3 +1,10 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #50B5C4 0%, #ffffff 100%);
+    background-attachment: fixed;
+    height: 100%;
+  }
+
 .contents {
     padding: 0% 20%;
 }
@@ -60,4 +67,23 @@
  
 .slick-dots .slick-active button{
     background:#999;
+}
+
+.menu {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    background: #50B5C4;
+    border-radius: 25px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+    width: 80px;
+    margin: 10px 50px auto;
+    padding: 15px 30px;
+}
+  
+a:hover {
+    transform: scale(1.05);
 }

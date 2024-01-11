@@ -292,12 +292,12 @@ def update_design(request, id):
 		design.title = request.POST['title']
 		design.path = request.POST['path']
 		design.save()
-		return render(request, 'fashion_ai/detail.html', context)
+		return redirect(update_design)
 	
 	context = {
         "design": design,
     }
-	return render(request, 'fashion_ai/mydesign.html', context)
+	return render(request, 'fashion_ai/detail.html', context)
 
 def delete_design(request, id):
     try:

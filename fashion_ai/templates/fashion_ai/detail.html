@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset = "utf-8">
+    <title>detail</title>
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+</head>
+<body>
+    {% if design %}
+        <form method="post">
+        {% csrf_token %}
+        <img src="{% static design.path %}"> 
+        </form>
+    {% else %}
+    {% endif %}
+</body>
+</html>

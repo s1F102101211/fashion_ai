@@ -8,13 +8,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 </head>
 <body>
-    <p>mydesign</p>
-
     <div class="contents">
         <ul class="slider">
         {% if design %}
         {% for item in design %}
-        <li><img src="{% static item.path %}"></li>
+        <li><a href="{% url 'update_design' item.id %}"><img src="{% static item.path %}"></a></li>
         {% endfor %}
         {% else %}
         <p>empty</p>
@@ -42,6 +40,6 @@
         });
     </script>
 
-    <a href="{% url 'home' %}">BACK</a><br>
+    <a class="menu" href="{% url 'home' %}">BACK</a><br>
 </body>
 </html>
