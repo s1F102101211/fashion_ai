@@ -4,17 +4,17 @@
 <head>
     <meta charset = "utf-8">
     <title>preview</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/preview.css' %}">
 </head>
 <body>
-    <p>preview</p>
+    <h2>PREVIEW</h2>
     <img src="{{ img }}"><br>
 
     <form method="post">
         {% csrf_token %}
         <div>
             <label>category : </label>
-            <select name="category" style="width: 158px; height: 22px;">
+            <select name="category" style="width: 158px; height: 40px;">
                 <option value="トップス">トップス</option>
                 <option value="アウター">アウター</option>
                 <option value="その他">その他</option>
@@ -28,9 +28,9 @@
             <label>path : </label>
             <input name="path" value="fashion_ai/img/design/sample.png" style="width: 215px;">
         </div>
+    <div class="menu">
         <button type="submit">COMPLETE</button>
-    </form>
-
-    <a href="{% url 'select'  %}">BACK</a><br>
+        <a href="{% url 'select'  %}">BACK</a><br>
+    </div>
 </body>
 </html>
