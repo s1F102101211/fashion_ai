@@ -18,7 +18,7 @@
     <form method="POST" id="submitForm" onsubmit="disableButton()">
         {% csrf_token %}
         {{ form.as_p }}
-        <button id="submit" type="submit">送信</button>
+        <button id="submit" type="submit">SEND</button>
     </form>
 
     <script>
@@ -32,7 +32,7 @@
     {% endwith %}
 
     <div class="menu">
-    <a href="{% url 'select' %}">select</a><br>
+    <a href="{% url 'select' %}">NEXT</a><br>
     </div>
 
 

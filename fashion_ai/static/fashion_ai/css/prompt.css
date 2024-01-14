@@ -117,15 +117,15 @@ input[type="hidden"][name="csrfmiddlewaretoken"] {
     display: none;
 }
 
-/* menu */
-.menu {
+/* back */
+.back {
     text-align: center;
     color: #fff;
     width: fit-content;
     margin-right: auto;
-  }
+}
   
-  .menu a {
+.back a {
     display: block;
     margin: 20px auto;
     padding: 15px 30px;
@@ -137,8 +137,34 @@ input[type="hidden"][name="csrfmiddlewaretoken"] {
     letter-spacing: 1px;
     transition: transform 0.3s ease;
     width: fit-content;
-  }
+}
   
-  .menu a:hover {
+.back a:hover {
     transform: scale(1.05);
-  }
+}
+
+/* menu */
+.menu {
+    text-align: center;
+    color: #fff;
+    width: fit-content;
+    margin-right: auto;
+}
+  
+.menu a {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #ffffff;
+    background: #50B5C4;
+    border-radius: 25px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+    width: fit-content;
+}
+  
+.menu a:hover {
+    transform: scale(1.05);
+}
