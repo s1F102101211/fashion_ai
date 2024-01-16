@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 </head>
 <body>
+    <h2>MYDESIGN</h2>
     <div class="contents">
         <ul class="slider">
         {% if design %}
@@ -40,6 +41,53 @@
         });
     </script>
 
-    <a class="menu" href="{% url 'home' %}">BACK</a><br>
+
+    <div>
+        <p class="select_p">TOPS</p>
+        <div class="select_div">
+            {% if tops %}
+            {% for item in tops %}
+            <span class="select_span">
+                <a href="{% url 'update_design' item.id %}" class="select_a">
+                    <img src="{% static item.path %}" width="50px" height="50px">
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <p class="select_p">OUTER</p>
+        <div class="select_div">
+            {% if outer %}
+            {% for item in outer %}
+            <span class="select_span">
+                <a href="{% url 'update_design' item.id %}" class="select_a">
+                    <img src="{% static item.path %}" width="50px" height="50px">
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <p class="select_p">OTHER</p>
+        <div class="select_div">
+            {% if other %}
+            {% for item in other %}
+            <span class="select_span">
+                <a href="{% url 'update_design' item.id %}" class="select_a">
+                    <img src="{% static item.path %}" width="50px" height="50px">
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <br>
+    <div class="menu">
+        <a href="{% url 'home' %}">BACK</a>
+    </div>
 </body>
 </html>

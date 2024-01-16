@@ -4,15 +4,28 @@
 <head>
     <meta charset = "utf-8">
     <title>detail</title>
-    <link rel="stylesheet" href="{% static 'fashion_ai/css/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'fashion_ai/css/detail.css' %}">
 </head>
 <body>
-    {% if design %}
+    <h2>MYDESIGN</h2>
+    <div class="left">
+        <img src="{% static design.path %}">
+    </div>
+    <div class="right">
         <form method="post">
         {% csrf_token %}
-        <img src="{% static design.path %}"> 
+            <div>
+                <label>category</label><br>
+                <input name="category" value="{{ design.category }}">
+            </div>
+            <div>
+                <label>title</label><br>
+                <input name="title" value="{{ design.title }}">
+            </div><br>
+            <div class="menu"><button type="submit" style="width: 150px;">UPDATE</button></div>
+            <div class="menu"><a href="{% url 'delete_design' design.id %}">DELETE</a></div>
+            <div class="menu"><a href="{% url 'mydesign' %}">BACK</a></div>
         </form>
-    {% else %}
-    {% endif %}
+    </div>
 </body>
 </html>

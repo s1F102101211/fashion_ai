@@ -295,9 +295,8 @@ def update_design(request, id):
 	if request.method == 'POST':
 		design.category = request.POST['category']
 		design.title = request.POST['title']
-		design.path = request.POST['path']
 		design.save()
-		return redirect(update_design)
+		return redirect('update_design', id=id)
 	
 	context = {
         "design": design,
