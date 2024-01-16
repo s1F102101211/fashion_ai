@@ -10,11 +10,32 @@
 <body>
     {% for item in chat_results %}
         {% if forloop.counter0|divisibleby:2 %}
+            <div class="container3">
+            <img class="icon"src='{% static 'fashion_ai/img/logo/logo.png' %}'>
             <p class="item white-background">{{ item }}</p>
+            </div>
         {% else %}
             <p class="item green-background" style="text-align: right;">{{ item }}</p>
         {% endif %}
     {% endfor %}
+
+    <div class="container">
+
+    <div class="container2">
+    <br>
+    <br>
+    <br>
+    {% with '/fashion_ai/img/photo/'|add:image_path as image_static %}
+    <img src="{% static image_static %}" alt="Generated Image">
+    {% endwith %}
+
+    <div class="menu">
+    <a href="{% url 'select' %}">NEXT</a><br>
+    </div>
+
+    </div>
+
+    <div class="container2">
     <form method="POST" id="submitForm" onsubmit="disableButton()">
         {% csrf_token %}
         {{ form.as_p }}
@@ -27,12 +48,12 @@
         }
     </script>
 
-    {% with '/fashion_ai/img/photo/'|add:image_path as image_static %}
-    <img src="{% static image_static %}" alt="Generated Image">
-    {% endwith %}
-
     <div class="menu">
-    <a href="{% url 'select' %}">NEXT</a><br>
+    <a href="{% url 'home' %}">BACK</a><br>
+    </div>
+
+    </div>
+
     </div>
 
 

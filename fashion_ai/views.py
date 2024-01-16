@@ -142,7 +142,16 @@ def prompt(request):
 				# .env ファイルから環境変数をロードする
                 load_dotenv()
 
-                design_sentence = chat_results[len(chat_results) - 3]
+                match_sentence = chat_results[len(chat_results) - 3]
+
+                matches = re.findall(r'「([^「」]+)」', match_sentence)
+
+                # matchesには「〈」と「〉」で囲まれた部分がリストとして格納される
+                if matches:
+                    design_sentence = matches[0]
+                else:
+                    design_sentence = match_sentence
+
                 print(design_sentence)
 			
                 #seedの初期値

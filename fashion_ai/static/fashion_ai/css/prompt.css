@@ -19,6 +19,24 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* 要素を両端に配置 */
+}
+
+.container2{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container3{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 form button {
     display: block;
     margin-top: 10px;
@@ -77,9 +95,15 @@ form button {
     border-radius: 12px; /*角*/
     position: relative; 
     width: fit-content;
-    margin-right: auto;
+    margin-right: 25%;
     padding: 17px 13px;
+    display:flex;
     flex-direction: row; /* 左から右に並べる */
+}
+
+.icon{
+    margin-right:10px;
+    width:80px; /* アイコンの大きさ */
 }
 
 .white-background:after {
@@ -117,38 +141,12 @@ input[type="hidden"][name="csrfmiddlewaretoken"] {
     display: none;
 }
 
-/* back */
-.back {
-    text-align: center;
-    color: #fff;
-    width: fit-content;
-    margin-right: auto;
-}
-  
-.back a {
-    display: block;
-    margin: 20px auto;
-    padding: 15px 30px;
-    text-decoration: none;
-    color: #ffffff;
-    background: #50B5C4;
-    border-radius: 25px;
-    font-size: 20px;
-    letter-spacing: 1px;
-    transition: transform 0.3s ease;
-    width: fit-content;
-}
-  
-.back a:hover {
-    transform: scale(1.05);
-}
-
 /* menu */
 .menu {
+    margin-top:20px;
     text-align: center;
     color: #fff;
     width: fit-content;
-    margin-right: auto;
 }
   
 .menu a {
