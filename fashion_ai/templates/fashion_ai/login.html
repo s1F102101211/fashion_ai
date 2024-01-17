@@ -11,6 +11,7 @@
   <h2>LOGIN</h2>
   
   <form method="post">
+    {% csrf_token %}
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" id="username" name="username">
